@@ -15,7 +15,7 @@ export class OrmConfigService implements TypeOrmOptionsFactory {
       password: this.srv.get('DATABASE_PASSWORD'),
       database: this.srv.get('DATABASE_DB'),
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
 
     }
     await this.createDatabaseIfNotExists(retVal)

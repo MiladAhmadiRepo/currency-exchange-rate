@@ -6,11 +6,11 @@ import { join } from 'path'
 
 import { ExchangeRateModule } from '../../exchange-rate/module/exchange-rate.module'
 import { RoutesEntity } from '../../typeorm/models/auth/routes.model'
-import { UserBaseEntity } from '../../typeorm/models/users/user_base.model'
+import { UserBaseEntity } from '../../typeorm/models/exchange_rate/exchange_rate.model'
 import { OrmModule } from '../../typeorm/module/orm.module'
-import { configModuleOptions } from '../constant/options'
 import { AppLogger } from '../logger/logger.service'
 import { RouteModule } from './route.module'
+import configuration from "../config/configuration";
 
 @Module({
   imports: [
@@ -18,7 +18,15 @@ import { RouteModule } from './route.module'
       rootPath: join(__dirname, '../../../../../public'),
       serveRoot: '/assets'
     }),
-    ConfigModule.forRoot(configModuleOptions),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: (() => {
+        const logger = new AppLogger()
+        logger.log('**************************' + process.env.NODE_ENV + '************************')
+        return `env/.env.${process.env.NODE_ENV || 'local'}`
+      })(),
+      load: [configuration]
+    }),
     TypeOrmModule.forFeature([
       RoutesEntity,
       UserBaseEntity,

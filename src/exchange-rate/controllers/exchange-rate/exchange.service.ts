@@ -7,6 +7,7 @@ import { AxiosRequestConfig } from 'axios'
 import { DataSource, Repository } from 'typeorm'
 import { AppLogger } from '../../../core/logger/logger.service'
 import { ClinicDtoIn, ClinicDtoOut, ClinicEmbeddingDtoIn, GetClinicsDtoOut } from './exchange.dto'
+import { ExchangeApisService } from "../exchange-apis/exchange-apis.service";
 
 @Injectable()
 export class ExchangeService {
@@ -16,27 +17,16 @@ export class ExchangeService {
     private dataSource: DataSource,
     private readonly httpService: HttpService,
     private readonly logger: AppLogger,
-    private readonly config: ConfigService,
+    private readonly exchangeApisService: ExchangeApisService,
   ) {
   }
 
 
-  // async getClinics(): Promise<IResponseAll<GetClinicsDtoOut>> {
-  //   let clinicList = await this.getClinicList()
-  //   let res = clinicList.map((item) => {
-  //     return {
-  //       clinicId: item.id,
-  //       clinicName: item.clinicName
-  //     } as GetClinicsDtoOut
-  //   })
-  //
-  //   return {
-  //     status: 200,
-  //     message: 'success',
-  //     count: res.length,
-  //     results: res
-  //   }
-  // }
+  async getProvider1(): Promise<void> {
+    let clinicList = await this.exchangeApisService.getCurrency3('GBP','EUR')
+
+
+  }
   // async addClinic(req: Request, body: ClinicDtoIn): Promise<IResponse<ClinicDtoOut>> {
   //   const [err1, res] = await to(
   //     this.clinicEntity.save({

@@ -13,20 +13,20 @@ import { ExchangeService } from './exchange.service'
 
 export class ExchangeController {
   constructor(
-    private readonly clinicService: ExchangeService,
+    private readonly exchangeService: ExchangeService,
     private dataSource: DataSource
   ) {}
 
   // ***************************************************************************** */
-  @Post(  '/add-exchange-rate.module.ts')
+  @Post(  '/add-exchange-rate')
   async addClinic(
     @Req() req: Request,
-    @Body() body: ClinicDtoIn
+    // @Body() body: ClinicDtoIn
   ):
     // Promise<ClinicDtoOut>
     Promise<void>
   {
-    // return await this.clinicService.addClinic(req, body)
+    return await this.exchangeService.getProvider1( )
   }
 
   @Get( )

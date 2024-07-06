@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { VersioningType } from "@nestjs/common";
 import { AppModule } from "./core/module/app.module";
+import { HttpExceptionFilter } from "./core/exceptions/http-exception-filter";
 
 
 const logger = new AppLogger();
@@ -16,7 +17,7 @@ async function bootstrap() {
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('exchange')
-    .setDescription('The exchange API description')
+    .setDescription('The exchange-rate API description')
     .setVersion('1.0.0.1')
     .addBearerAuth()
     .setExternalDoc('Download JSON Specifications', '/v1/api/swagger.json')
@@ -33,6 +34,7 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI
   })
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(process.env.APP_PORT, () => {
     logger.log(

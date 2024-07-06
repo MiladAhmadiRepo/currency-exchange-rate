@@ -14,7 +14,7 @@ import { ExchangeRateModule } from "../../exchange-rate/module/exchange-rate.mod
           //   module: AuthModule
           // },
           {
-            path: 'exchange-rate',
+            path: 'exchange-rate-rate',
             module: ExchangeRateModule
           },
 
