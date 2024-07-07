@@ -5,12 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { join } from 'path'
 
 import { ExchangeRateModule } from '../../exchange-rate/module/exchange-rate.module'
-import { RoutesEntity } from '../../typeorm/models/auth/routes.model'
-import { UserBaseEntity } from '../../typeorm/models/exchange_rate/exchange_rate.model'
 import { OrmModule } from '../../typeorm/module/orm.module'
 import { AppLogger } from '../logger/logger.service'
 import { RouteModule } from './route.module'
 import configuration from "../config/configuration";
+import { ExchangeRateEntity } from "../../typeorm/models/exchange_rate/exchange-rate.model";
+import { ExchangeProviderEntity } from "../../typeorm/models/exchange_rate/exchange-providers.model";
 
 @Module({
   imports: [
@@ -28,8 +28,8 @@ import configuration from "../config/configuration";
       load: [configuration]
     }),
     TypeOrmModule.forFeature([
-      RoutesEntity,
-      UserBaseEntity,
+      ExchangeProviderEntity,
+      ExchangeRateEntity
     ]),
     RouteModule,
     OrmModule,

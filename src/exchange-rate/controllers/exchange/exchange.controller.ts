@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, Req } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiExtraModels, ApiParam, ApiTags } from '@nestjs/swagger'
 import { DataSource } from 'typeorm'
-import { ClinicDtoIn, ClinicDtoOut, ClinicEmbeddingDtoIn, GetClinicsDtoOut } from './exchange.dto'
+import {   ExchangeRateAndConversionDtoOut,   } from "./exchange.dto";
 import { ExchangeService } from './exchange.service'
+import { IResponse } from "../../../core/global-dto/IResponse";
 
 
 @ApiTags('exchange')
@@ -18,15 +19,16 @@ export class ExchangeController {
   ) {}
 
   // ***************************************************************************** */
-  @Post(  '/add-exchange-rate')
+  @Get(  '/exchange-and-conversion')
   async addClinic(
     @Req() req: Request,
-    // @Body() body: ClinicDtoIn
+    @Query('amount') amount: number,
+    @Query('base') base: string,
+    @Query('target') target: string,
   ):
-    // Promise<ClinicDtoOut>
-    Promise<void>
+    Promise<IResponse<ExchangeRateAndConversionDtoOut>>
   {
-    return await this.exchangeService.getProvider1( )
+    return await this.exchangeService.exchangeRateAndConversion(base,target,amount )
   }
 
   @Get( )

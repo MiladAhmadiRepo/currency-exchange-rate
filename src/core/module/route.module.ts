@@ -9,16 +9,10 @@ import { ExchangeRateModule } from "../../exchange-rate/module/exchange-rate.mod
       {
         path: 'api',
         children: [
-          // {
-          //   path: 'auth',
-          //   module: AuthModule
-          // },
           {
-            path: 'exchange-rate-rate',
+            path: 'exchange-rate',
             module: ExchangeRateModule
           },
-
-
         ]
       }
     ])

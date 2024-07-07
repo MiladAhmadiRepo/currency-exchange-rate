@@ -10,6 +10,41 @@ export default () => ({
     db: process.env.DATABASE_DB,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD
-  },
+  }
 
 })
+
+export const fiatCurrencies: string[] = [
+  "AUD",
+  "BGN",
+  "BRL",
+  "CAD",
+  "CHF",
+  "CNY",
+  "CZK",
+  "DKK",
+  "EUR",
+  "GBP",
+  "HKD",
+  "HUF",
+  "IDR",
+  "IRR",
+  "ILS",
+  "INR",
+  "ISK",
+  "JPY",
+  "KRW",
+  "MXN",
+  "MYR",
+  "NOK",
+  "NZD",
+  "PHP",
+  "PLN",
+  "RON",
+  "SEK",
+  "SGD",
+  "THB",
+  "TRY",
+  "USD",
+  "ZAR"
+];

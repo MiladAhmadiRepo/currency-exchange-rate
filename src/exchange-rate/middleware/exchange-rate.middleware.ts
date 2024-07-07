@@ -8,37 +8,40 @@ export class ExchangeRateMiddleware implements NestMiddleware {
     private logger: AppLogger,
   ) {}
   use(req: Request, res: Response, next: NextFunction) {
-    try {
-      if (req.headers['authorization']) {
-        let jsn: any = null
-        try {
-          // jsn = this.jwt.verify(req.headers['authorization'].toString().split(' ')[1])
-        } catch (e) {
-          this.logger.log(e)
-          // throw new HttpException(this.i18n.t('messages.TOKEN_NOT_FOUND'), HttpStatus.UNAUTHORIZED)
-        }
-        if (!req.body) {
-          req.body = {
-            jwt: jsn
-          }
-        } else {
-          req.body.jwt = jsn
-          ;(req as any).jwt = jsn
-        }
-
-        next()
-      } else {
-        // throw new HttpException(
-          // this.i18n.t('messages.YOUR_REQUEST_IS_UNAUTHORIZED'),
-          // HttpStatus.UNAUTHORIZED
-        // )
-      }
-    } catch (e) {
-      this.logger.log(e)
-      // throw new HttpException(
-      //   this.i18n.t('messages.YOUR_SESSION_IS_EXPIRED'),
-      //   HttpStatus.UNAUTHORIZED
-      // )
-    }
+    // try {
+    //   if (req.headers['authorization']) {
+    //     let jsn: any = null
+    //     try {
+    //       jsn = this.jwt.verify(req.headers['authorization'].toString().split(' ')[1])
+    //     } catch (e) {
+    //       this.logger.log(e)
+    //       throw new HttpException(this.i18n.t('messages.TOKEN_NOT_FOUND'), HttpStatus.UNAUTHORIZED)
+    //     }
+    //     if (!req.body) {
+    //       req.body = {
+    //         jwt: jsn
+    //       }
+    //     } else {
+    //       req.body.jwt = jsn
+    //       ;(req as any).jwt = jsn
+    //     }
+    //
+    //     next()
+    //   } else {
+    //     throw new HttpException(
+    //       this.i18n.t('messages.YOUR_REQUEST_IS_UNAUTHORIZED'),
+    //       HttpStatus.UNAUTHORIZED
+    //     )
+    //   }
+    // }
+    // catch (e) {
+    //   this.logger.log(e)
+    //   throw new HttpException(
+    //     this.i18n.t('messages.YOUR_SESSION_IS_EXPIRED'),
+    //     HttpStatus.UNAUTHORIZED
+    //   )
+    // }
+    this.logger.log('this is just a show case of Authorization,jwt,i18n in middleware')
+    next()
   }
 }

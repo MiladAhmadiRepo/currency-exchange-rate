@@ -18,23 +18,4 @@ export class BaseEntity {
   @DeleteDateColumn()
   deletedAt?: Date
 
-  @ApiProperty({ required: false })
-  @Column({
-    nullable: true
-  })
-  modifiedAt: Date
-
-  @ApiProperty({ required: false })
-  @Column({ nullable: true })
-  modifiedBy?: number
-
-  @ApiProperty({ required: false })
-  @Column({
-    nullable: true
-  })
-  lockedAt: Date
-
-  @ApiProperty({ required: false })
-  @Column({ nullable: true })
-  lockedBy: number
 }

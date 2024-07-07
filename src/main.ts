@@ -17,7 +17,7 @@ async function bootstrap() {
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('exchange')
-    .setDescription('The exchange-rate API description')
+    .setDescription('The exchange API description')
     .setVersion('1.0.0.1')
     .addBearerAuth()
     .setExternalDoc('Download JSON Specifications', '/v1/api/swagger.json')
