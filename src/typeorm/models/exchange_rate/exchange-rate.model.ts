@@ -14,13 +14,13 @@ export class ExchangeRateEntity extends BaseEntity {
   timeLastUpdateRate: Date
 
   @Column({ type: 'decimal',  nullable: false })
-  conversionRate: number
+  exchangeRate: number
 
   @Column({ type: 'varchar', length: 100, nullable: true })
-  baseCode: string;
+  base: string;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
-  targetCode: string;
+  target: string;
 
   // ***************************************************************** */
   @ManyToOne(() => ExchangeProviderEntity, (exchangeProviderEntity) => exchangeProviderEntity.provider , {

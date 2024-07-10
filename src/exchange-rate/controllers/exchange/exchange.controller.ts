@@ -17,10 +17,9 @@ export class ExchangeController {
     private readonly exchangeService: ExchangeService,
     private dataSource: DataSource
   ) {}
-
   // ***************************************************************************** */
-  @Get(  '/exchange-and-conversion')
-  async addClinic(
+  @Get(  '/all-conversion')
+  async allConversion(
     @Req() req: Request,
     @Query('amount') amount: number,
     @Query('base') base: string,
@@ -28,15 +27,43 @@ export class ExchangeController {
   ):
     Promise<IResponse<ExchangeRateAndConversionDtoOut>>
   {
-    return await this.exchangeService.exchangeRateAndConversion(base,target,amount )
+    return await this.exchangeService.allConversion(base,target,amount )
   }
 
-  @Get( )
-  async getClinics():
-    // Promise<GetClinicsDtoOut>
-    Promise<void>
+  @Get(  '/conversion-irr-to-usd')
+  async conversionIrrToUsd(
+    @Req() req: Request,
+    @Query('amount') amount: number,
+    @Query('base') base: string,
+    @Query('target') target: string,
+  ):
+    Promise<IResponse<ExchangeRateAndConversionDtoOut>>
   {
-    // return await this.clinicService.getClinics()
+    return await this.exchangeService.conversionIrrToUsd(base,target, amount )
+  }
+
+  @Get(  '/conversion-usd-to-any-other-fiat-currencies-or-between-fiat-currencies')
+  async conversionUsdToAnyOtherFiatCurrenciesOrBetweenFiatCurrencies(
+    @Req() req: Request,
+    @Query('amount') amount: number,
+    @Query('base') base: string,
+    @Query('target') target: string,
+  ):
+    Promise<IResponse<ExchangeRateAndConversionDtoOut>>
+  {
+    return await this.exchangeService.conversionUsdToAnyOtherFiatCurrenciesOrBetweenFiatCurrencies(base,target,amount )
+  }
+
+  @Get(  '/conversion-eur-to-any-other-cryptocurrency-or-between-cryptocurrencies')
+  async conversionEurToAnyCryptocurrencyOrBetweenCryptocurrencies(
+    @Req() req: Request,
+    @Query('amount') amount: number,
+    @Query('base') base: string,
+    @Query('target') target: string,
+  ):
+    Promise<IResponse<ExchangeRateAndConversionDtoOut>>
+  {
+    return await this.exchangeService.conversionEurToAnyCryptocurrencyOrBetweenCryptocurrencies(base,target,amount )
   }
 
 }
