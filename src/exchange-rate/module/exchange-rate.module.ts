@@ -12,6 +12,7 @@ import { ExchangeRateMiddleware } from '../middleware/exchange-rate.middleware'
 import { ProviderApisService } from "../../datasource/provider-apis/provider-apis.service";
 import { ExchangeRateEntity } from "../../typeorm/models/exchange_rate/exchange-rate.model";
 import { ExchangeProviderEntity } from "../../typeorm/models/exchange_rate/exchange-providers.model";
+import { AsyncLocalStorage } from 'async_hooks'
 
 @Module({
   imports: [
@@ -27,6 +28,10 @@ import { ExchangeProviderEntity } from "../../typeorm/models/exchange_rate/excha
     ProviderApisService,
     ExchangeService,
     AppLogger,
+    {
+      provide: AsyncLocalStorage,
+      useValue: new AsyncLocalStorage(),
+    },
   ]
 })
 export class ExchangeRateModule implements NestModule {
