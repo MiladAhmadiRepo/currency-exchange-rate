@@ -25,6 +25,7 @@ export const fiatCurrencies: string[] = [
   "DKK",
   "EUR",
   "GBP",
+  "GEL",
   "HKD",
   "HUF",
   "IDR",

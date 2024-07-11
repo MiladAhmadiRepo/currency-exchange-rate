@@ -25,7 +25,7 @@ export class ProviderApisService implements OnModuleInit {
     await this.addProvidersIfNotExists();
   }
 
-  async getExchangeRateFromProvider1(base, target): Promise<ProviderDtoOut> {
+  async getExchangeRateFromProvider1(base: string, target : string): Promise<ProviderDtoOut> {
     let returnData: ProviderDtoOut ;
     const apiKey = process.env.CURRENCY_API;
     const providerId = (await this.getProviderByName("CURRENCY_API")).id;
@@ -72,10 +72,10 @@ export class ProviderApisService implements OnModuleInit {
     }
     try {
       returnData = {
-        timeLastUpdateRate: (res as any).meta.last_updated_at,
-        exchangeRate: (res as any).data.USD.value,
-        base: "IRR",
-        target: "USD",
+        timeLastUpdateRate: (res as any).data.date,
+        exchangeRate: (res as any).data.rates[target],
+        base: base,
+        target: target,
         providerId
       };
     } catch (err) {
@@ -83,20 +83,12 @@ export class ProviderApisService implements OnModuleInit {
       throw new HttpException(" failed to convert data from Provider 1",
         HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    // axios.get(address, { params })
-    //   .then(response => {
-    //     exchangeRate = response.data;
-    //   })
-    //   .catch(error => {
-    //     console.error("Error:", error.message);
-    //     throw new HttpException("Provider 2 failed to fetch exchange rates.",
-    //       HttpStatus.INTERNAL_SERVER_ERROR);
-    //   });
+
     return returnData;
   }
 
-  async getExchangeRateFromProvider3(target: string, base): Promise<number> {
-    let exchangeRate = 1;
+  async getExchangeRateFromProvider3( base:string,target: string,):  Promise<ProviderDtoOut> {
+    let returnData: ProviderDtoOut ;
     const apiKey = process.env.ABSTRACT_API;
     const provider  = await this.getProviderByName("ABSTRACT_API");
     const providerId =provider.id;
@@ -107,33 +99,26 @@ export class ProviderApisService implements OnModuleInit {
       target: target
     };
     const [err1, res] = await to(axios.get(address, { params }));
-    exchangeRate = res.data;
-
     if (err1) {
       this.logger.error(err1);
       throw new HttpException("Provider 3 failed to fetch exchange rates.",
         HttpStatus.SERVICE_UNAVAILABLE);
     }
-    return exchangeRate;
+    try {
+      returnData = {
+        timeLastUpdateRate: new Date((res as any).data.last_updated),
+        exchangeRate: (res as any).data.exchange_rate,
+        base: base,
+        target: target,
+        providerId
+      };
+    } catch (err) {
+      this.logger.error(err1);
+      throw new HttpException(" failed to convert data from Provider 1",
+        HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    return returnData;
   }
-
-  // async getExchangeRateFromProvider4(target: string, base): Promise<number> {
-  //   const apiKey = process.env.ABSTRACT_API;
-  //   const address = process.env.ABSTRACT_API_ADDRESS;
-  //   const params = {
-  //     api_key: apiKey,
-  //     base: base,
-  //     target: target
-  //   };
-  //   axios.get(address, { params })
-  //     .then(response => {
-  //       const user = response.data;
-  //
-  //     })
-  //     .catch(error => {
-  //       console.error("Error:", error.message);
-  //     });
-  // }
 
   // ************************************************************************************************************************************* */
 

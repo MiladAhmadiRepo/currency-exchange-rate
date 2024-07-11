@@ -6,13 +6,9 @@ export class IrrToUsdDtoIn {
 
 }
 
-export class ExchangeRateAndConversionDtoOut {
-  @ApiProperty()
-  exchangeRate: number
-
+export class ConversionValueDtoOut {
   @ApiProperty()
   conversionValue: number
-
 }
 
 export class ExchangeRateDtoIn {
