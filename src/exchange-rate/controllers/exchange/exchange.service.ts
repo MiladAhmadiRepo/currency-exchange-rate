@@ -26,39 +26,6 @@ export class ExchangeService {
 
   // ************************************************************************************************************************************* */
 
-  // async allConversion(base: string, target: string, amount: number): Promise<IResponse<ConversionValueDtoOut>> {
-  //   if ((base == "IRR" && target == "USD") || (base == "USD" && target == "IRR")) {
-  //     return await this.conversionIrrToUsd(base, target, amount);
-  //   } else if (
-  //     (base != "IRR" && target != "IRR") &&
-  //     (this.isItAFiatCurrency(base) && this.isItAFiatCurrency(target))
-  //   ) {
-  //     return await this.conversionUsdToAnyOtherFiatCurrenciesOrBetweenFiatCurrencies(base, target, amount);
-  //   } else if ((base == "EUR" && !this.isItAFiatCurrency(target)) ||
-  //     (!this.isItAFiatCurrency(base) && !this.isItAFiatCurrency(target))) {
-  //     return await this.conversionEurToAnyCryptocurrencyOrBetweenCryptocurrencies(base, target, amount);
-  //   } else {
-  //     throw new HttpException("not Support currency",
-  //       HttpStatus.BAD_REQUEST);
-  //   }
-  //
-  // }
-  //
-  // async conversionIrrToUsd(base: string, target: string, amount: number): Promise<IResponse<ConversionValueDtoOut>> {
-  //   if ((base == "IRR" && target == "USD") || (base == "USD" && target == "IRR")) {
-  //     let exchangeRateData = await this.extractOrSaveExchangeRateData(base, target, this.exchangeApisService.getExchangeRateFromProvider1.bind);
-  //     let result = this.createOutputConversionResult(exchangeRateData, base, target, amount);
-  //     return {
-  //       status: 200,
-  //       message: `your conversion is ${base} To ${target}`,
-  //       result
-  //     };
-  //   } else {
-  //     throw new HttpException("not Support currency",
-  //       HttpStatus.BAD_REQUEST);
-  //   }
-  // }
-
   async conversionFiatCurrencies(base: string, target: string, amount: number): Promise<IResponse<ConversionValueDtoOut>> {
     let result: ConversionValueDtoOut={conversionValue:-1};
     let conversionBaseToUsd:number;
