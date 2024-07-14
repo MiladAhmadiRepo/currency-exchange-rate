@@ -87,7 +87,7 @@ export class ExchangeService {
 
   // ************************************************************************************************************************************* */
 
-  private async extractOrSaveExchangeRateData(base: string, target: string, callbackProvider: (base: string, target: string) => Promise<ProviderDtoOut>) {
+  private async extractOrSaveExchangeRateData(base: string, target: string, callbackProvider?: (base: string, target: string) => Promise<ProviderDtoOut>) {
     let exchangeRateData: ProviderDtoOut;
     exchangeRateData = await this.getCurrenciesByBaseAndTarget(base, target);
     if (!exchangeRateData) {
